@@ -42,59 +42,59 @@ export class HttpServiceProvider {
   }
 
   public makeGetSoapRequest(url, param) {
-  	if (this.networkStatusOnline) {
-      return new Promise((resolve, reject) => {
-	        let xhr = new XMLHttpRequest();
-	        xhr.open('GET', testBaseURL, true);
-	        xhr.setRequestHeader('Content-Type', 'text/xml');
-          xhr.setRequestHeader("SOAPAction", url); //optional
-          xhr.responseType = "text";
-	        xhr.onload = () => {
-	            this.hideSpinner();
-	            if (xhr.status >= 200 && xhr.status < 300) {
-	                resolve(this.convertXmltoJson(xhr.responseText));
-	            } else {
-	                reject(xhr.statusText);
-	            }
-	        };
-	        xhr.onerror = () => { 
-	          this.hideSpinner();
-	        	reject(xhr.statusText)
-	        };
-	        xhr.send(param);
-	    });
-    } else {
-      this.displayNetworkStatus('Your internet connection appears to be offline !!!');
+	if (this.networkStatusOnline) {
+		return new Promise((resolve, reject) => {
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', testBaseURL, true);
+			xhr.setRequestHeader('Content-Type', 'text/xml');
+			xhr.setRequestHeader("SOAPAction", url); //optional
+			xhr.responseType = "text";
+			xhr.onload = () => {
+			    this.hideSpinner();
+			    if (xhr.status >= 200 && xhr.status < 300) {
+				resolve(this.convertXmltoJson(xhr.responseText));
+			    } else {
+				reject(xhr.statusText);
+			    }
+			};
+			xhr.onerror = () => { 
+			  this.hideSpinner();
+				reject(xhr.statusText)
+			};
+			xhr.send(param);
+		});
+	} else {
+	this.displayNetworkStatus('Your internet connection appears to be offline !!!');
 	    return null;
-    }
+	}
   }
 
   public makePostSoapRequest(url, param) {
   	if (this.networkStatusOnline) {
-      return new Promise((resolve, reject) => {
-	        let xhr = new XMLHttpRequest();
-	        xhr.open('POST', testBaseURL, true);
-	        xhr.setRequestHeader('Content-Type', 'text/xml');
-          xhr.setRequestHeader("SOAPAction", url); //optional
-          xhr.responseType = "text";
-	        xhr.onload = () => {
-	            this.hideSpinner();
-	            if (xhr.status >= 200 && xhr.status < 300) {
-	                resolve(this.convertXmltoJson(xhr.responseText));
-	            } else {
-	                reject(xhr.statusText);
-	            }
-	        };
-	        xhr.onerror = () => { 
-	          this.hideSpinner();
-	        	reject(xhr.statusText)
-	        };
-	        xhr.send(param);
-	    });
-    } else {
-      this.displayNetworkStatus('Your internet connection appears to be offline !!!');
+		return new Promise((resolve, reject) => {
+			let xhr = new XMLHttpRequest();
+			xhr.open('POST', testBaseURL, true);
+			xhr.setRequestHeader('Content-Type', 'text/xml');
+			xhr.setRequestHeader("SOAPAction", url); //optional
+			xhr.responseType = "text";
+			xhr.onload = () => {
+			    this.hideSpinner();
+			    if (xhr.status >= 200 && xhr.status < 300) {
+				resolve(this.convertXmltoJson(xhr.responseText));
+			    } else {
+				reject(xhr.statusText);
+			    }
+			};
+			xhr.onerror = () => { 
+			  this.hideSpinner();
+				reject(xhr.statusText)
+			};
+			xhr.send(param);
+		});
+	} else {
+	this.displayNetworkStatus('Your internet connection appears to be offline !!!');
 	    return null;
-    }
+	}
   }
 
   public showSpinner() {
